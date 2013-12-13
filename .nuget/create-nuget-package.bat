@@ -1,1 +1,1 @@
-nuget pack ../Pfz.TypeBuilding.csproj -Prop Configuration=Release -Build -OutputDirectory ../bin -Version 1.0.0
+nuget pack ../Pfz.TypeBuilding.csproj -Prop Configuration=Release -Build -OutputDirectory ../bin -Version 1.0.1
