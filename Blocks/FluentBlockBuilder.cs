@@ -416,15 +416,30 @@ namespace Pfz.TypeBuilding.Blocks
 
 			if (object.ReferenceEquals(this, _method.Body))
 			{
-				if (_method.ReturnType == typeof(void))
+				var returnType = _method.ReturnType;
+
+				if (returnType == typeof(void))
 					yield return Expression.Label(_method._returnTarget);
-				else if (_method.ReturnType.IsValueType)
-				{
-					object value = Activator.CreateInstance(_method.ReturnType);
-					yield return Expression.Label(_method._returnTarget, Expression.Constant(value));
-				}
 				else
-					yield return Expression.Label(_method._returnTarget, Expression.Constant(null, _method.ReturnType));
+				{
+					bool isNullableOrReference;
+					if (returnType.IsValueType)
+					{
+						isNullableOrReference = returnType.IsGenericType && returnType.GetGenericTypeDefinition() == typeof(Nullable<>);
+					}
+					else
+					{
+						isNullableOrReference = true;
+					}
+
+					if (isNullableOrReference)
+						yield return Expression.Label(_method._returnTarget, Expression.Constant(null, returnType));
+					else
+					{
+						object value = Activator.CreateInstance(returnType);
+						yield return Expression.Label(_method._returnTarget, Expression.Constant(value, returnType));
+					}
+				}
 			}
 		}
 

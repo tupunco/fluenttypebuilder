@@ -129,7 +129,7 @@ namespace Pfz.TypeBuilding
 			var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(new AssemblyName(name), access);
 			var module = assembly.DefineDynamicModule(name);
 
-			_type = module.DefineType(name, TypeAttributes.NotPublic, baseType, _interfaceTypes);
+			_type = module.DefineType(name, TypeAttributes.Public, baseType, _interfaceTypes);
             _type.DefineDefaultConstructor(MethodAttributes.Public);
 			_delegatesField = _type.DefineField(".delegates", typeof(Delegate[]), FieldAttributes.Private | FieldAttributes.Static);
 		}

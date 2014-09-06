@@ -38,6 +38,12 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Pfz.TypeBuilding.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -81,6 +87,9 @@
     <Compile Include="_ILoop.cs" />
     <Compile Include="Blocks\FluentLoopBuilder.cs" />
     <Compile Include="_Visitor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pfz.TypeBuilding.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
